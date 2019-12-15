@@ -1,0 +1,25 @@
+version: '3'
+services:
+  react-app:
+    image: jacksonlabs/react-app:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # build a production package (true) or (false) 
+        - BUILD=false
+    ports:
+      - 3000:3000
+
+    # Volume only required for hot reloading in development mode
+    volumes:
+      - "./app/public:/app/public:ro"
+      - "./app/src:/app/src:ro"
+
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+
+      # node (development) or (production) environment
+      - NODE_ENV=development
+
