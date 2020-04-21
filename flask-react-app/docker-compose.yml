@@ -6,16 +6,23 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - 8081:8080
+      - 8080:8080
     
   react-app:
     image: jacksonlabs/react-app:local-infra
+
+    # Include stdin_open and tty if using development mode
+    # stdin_open: true
+    # tty: true
+
     build:
       context: ../react-app/
       dockerfile: Dockerfile
       args:
         # build a production package (true) or (false) 
         - BUILD=true
+        # API endpoint for the client
+        - REACT_APP_API_ENDPOINT=api
 
     # Volume only required for hot reloading in development mode
     volumes:

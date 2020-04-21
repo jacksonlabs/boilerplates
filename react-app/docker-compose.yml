@@ -2,12 +2,16 @@ version: '3'
 services:
   react-app:
     image: jacksonlabs/react-app:local
+    stdin_open: true
+    tty: true
     build:
       context: .
       dockerfile: Dockerfile
       args:
         # build a production package (true) or (false) 
         - BUILD=false
+        # API endpoint for the client
+        - REACT_APP_API_ENDPOINT="api"
     ports:
       - 3000:3000
 
@@ -19,7 +23,6 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=3000
-
+      
       # node (development) or (production) environment
       - NODE_ENV=development
-

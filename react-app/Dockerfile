@@ -24,6 +24,10 @@ ENV NODE_ENV production
 ENV HOST 0.0.0.0
 ENV PORT 3000
 
+# Client API endpoint
+ARG REACT_APP_API_ENDPOINT
+ENV REACT_APP_API_ENDPOINT $REACT_APP_API_ENDPOINT
+
 ARG BUILD=true
 RUN [ "$BUILD" = "true" ] && npm run build || echo "Skipping build"
 
